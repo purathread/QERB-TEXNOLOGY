@@ -33,10 +33,10 @@
         }
     </style>
 </head>
-<body class="bg-black text-gray-300 font-sans antialiased">
+<body class="bg-black text-gray-300 font-sans antialiased pt-24">
 
-    <!-- Header / Navbar -->
-    <header class="sticky top-0 z-50 bg-black/90 backdrop-blur border-b border-qerb-dark/30">
+    <!-- Header / Navbar (Scroll with animation) -->
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-black/90 backdrop-blur border-b border-qerb-dark/30 transition-transform duration-300 ease-in-out">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
             
             <!-- Loqo hissəsi -->
@@ -45,23 +45,23 @@
             </a>
 
             <nav class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#liftler" class="hover:text-qerb-light transition text-qerb-gold">Xidmətlər</a>
-                <a href="#elaqe" class="hover:text-qerb-light transition text-qerb-gold">Əlaqə</a>
+                <a href="#liftler" class="hover:text-qerb-light transition text-qerb-gold" data-lang="menu_services">Xidmətlər</a>
+                <a href="#elaqe" class="hover:text-qerb-light transition text-qerb-gold" data-lang="menu_contact">Əlaqə</a>
             </nav>
             
             <!-- Dil Seçimi -->
             <div class="relative inline-block text-left" id="lang-menu">
-                <button type="button" onclick="toggleLangMenu()" class="inline-flex justify-center items-center gap-x-2 bg-gradient-to-r from-qerb-dark via-qerb-gold to-qerb-dark hover:from-qerb-gold hover:to-qerb-light text-black font-bold px-5 py-2.5 rounded-full text-sm transition shadow-lg shadow-qerb-gold/20">
+                <button type="button" onclick="toggleLangMenu(event)" class="inline-flex justify-center items-center gap-x-2 bg-gradient-to-r from-qerb-dark via-qerb-gold to-qerb-dark hover:from-qerb-gold hover:to-qerb-light text-black font-bold px-5 py-2.5 rounded-full text-sm transition shadow-lg shadow-qerb-gold/20">
                     <i class="fa-solid fa-globe"></i>
-                    <span>AZ</span>
+                    <span id="current-lang-text">AZ</span>
                     <i class="fa-solid fa-chevron-down text-xs"></i>
                 </button>
                 <!-- Açılan Menyusu -->
                 <div id="lang-dropdown" class="hidden absolute right-0 z-10 mt-2 w-36 origin-top-right rounded-xl bg-qerb-gray border border-qerb-dark/50 shadow-2xl focus:outline-none overflow-hidden transition-all">
                     <div class="py-1">
-                        <a href="#" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-qerb-gold/20 hover:text-qerb-light transition">Azərbaycan</a>
-                        <a href="#" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-qerb-gold/20 hover:text-qerb-light transition">English</a>
-                        <a href="#" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-qerb-gold/20 hover:text-qerb-light transition">Русский</a>
+                        <button onclick="changeLanguage('az')" class="w-full text-left block px-4 py-2.5 text-sm text-gray-300 hover:bg-qerb-gold/20 hover:text-qerb-light transition">Azərbaycan</button>
+                        <button onclick="changeLanguage('en')" class="w-full text-left block px-4 py-2.5 text-sm text-gray-300 hover:bg-qerb-gold/20 hover:text-qerb-light transition">English</button>
+                        <button onclick="changeLanguage('ru')" class="w-full text-left block px-4 py-2.5 text-sm text-gray-300 hover:bg-qerb-gold/20 hover:text-qerb-light transition">Русский</button>
                     </div>
                 </div>
             </div>
@@ -71,19 +71,19 @@
 
     <!-- Hero Section -->
     <section class="relative py-20 lg:py-32 overflow-hidden bg-black text-center border-b border-qerb-gray">
-        <!-- Qızılı arxa fon işığı -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-qerb-gold/10 rounded-full blur-[100px] pointer-events-none"></div>
         
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <span class="inline-block py-1.5 px-4 rounded-full bg-qerb-dark/20 text-qerb-light border border-qerb-gold/30 text-sm font-semibold tracking-wider uppercase mb-6">
+            <span class="inline-block py-1.5 px-4 rounded-full bg-qerb-dark/20 text-qerb-light border border-qerb-gold/30 text-sm font-semibold tracking-wider uppercase mb-6" data-lang="hero_badge">
                 Peşəkar Lift Sistemləri
             </span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-6 uppercase">
-                HƏR NÖV LİFT İŞLƏRİ İLƏ <span class="text-gradient-gold">MƏŞĞULUQ</span>
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-6 uppercase flex flex-col gap-2">
+                <span data-lang="hero_title_1">HƏR NÖV LİFT İŞLƏRİ İLƏ</span>
+                <span class="text-gradient-gold" data-lang="hero_title_2">MƏŞĞULUQ</span>
             </h1>
             <div class="inline-flex items-center space-x-4 bg-qerb-gray border border-qerb-dark/50 px-8 py-4 rounded-xl shadow-2xl">
                 <i class="fa-solid fa-shield-check text-qerb-light text-2xl"></i>
-                <span class="text-lg sm:text-xl font-bold tracking-widest text-qerb-light">KEYFİYYƏT • ETİBAR • TƏHLÜKƏSİZLİK</span>
+                <span class="text-lg sm:text-xl font-bold tracking-widest text-qerb-light" data-lang="hero_slogan">KEYFİYYƏT • ETİBAR • TƏHLÜKƏSİZLİK</span>
             </div>
         </div>
     </section>
@@ -94,14 +94,14 @@
         <!-- 1. Sərnişin Liftləri -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
             <div class="space-y-6">
-                <h2 class="text-3xl font-extrabold text-white">Sərnişin Liftləri</h2>
-                <p class="text-gray-400 leading-relaxed text-lg">
+                <h2 class="text-3xl font-extrabold text-white" data-lang="cat_pass">Sərnişin Liftləri</h2>
+                <p class="text-gray-400 leading-relaxed text-lg" data-lang="cat_pass_desc">
                     Müasir memarlıq standartlarına uyğun, yüksək rahatlıq, sürət və təhlükəsizlik sistemləri ilə təchiz olunmuş premium sərnişin liftlərinin quraşdırılması, təmiri və texniki xidməti. Yaşayış binaları, biznes mərkəzləri və otellər üçün ideal həllər.
                 </p>
                 <ul class="space-y-3 text-gray-300">
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>Yüksək səssizlik və rahat hərəkət</span></li>
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>Müasir dizayn və estetik görünüş</span></li>
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>Fövqəladə hallarda təhlükəsizlik sistemləri</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_pass_l1">Yüksək səssizlik və rahat hərəkət</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_pass_l2">Müasir dizayn və estetik görünüş</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_pass_l3">Fövqəladə hallarda təhlükəsizlik sistemləri</span></li>
                 </ul>
             </div>
             <div class="relative group">
@@ -115,14 +115,14 @@
         <!-- 2. Mətbəx Liftləri -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
             <div class="lg:order-2 space-y-6">
-                <h2 class="text-3xl font-extrabold text-white">Mətbəx Liftləri</h2>
-                <p class="text-gray-400 leading-relaxed text-lg">
+                <h2 class="text-3xl font-extrabold text-white" data-lang="cat_kitchen">Mətbəx Liftləri</h2>
+                <p class="text-gray-400 leading-relaxed text-lg" data-lang="cat_kitchen_desc">
                     Restoranlar, kafe, otel və xəstəxanalar üçün xüsusi olaraq hazırlanmış kiçik ölçülü, gigiyenik və sürətli yemək/xidmət liftləri. Qida və ləvazimatların mərtəbələr arası təhlükəsiz daşınmasını təmin edir.
                 </p>
                 <ul class="space-y-3 text-gray-300">
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>Paslanmayan polad (Stainless steel) konstruksiya</span></li>
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>Sanitariya normalarına tam uyğunluq</span></li>
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>Kompakt və rahat istifadə</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_kitchen_l1">Paslanmayan polad (Stainless steel) konstruksiya</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_kitchen_l2">Sanitariya normalarına tam uyğunluq</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_kitchen_l3">Kompakt və rahat istifadə</span></li>
                 </ul>
             </div>
             <div class="lg:order-1 relative group">
@@ -136,14 +136,14 @@
         <!-- 3. Yük Liftləri -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
             <div class="space-y-6">
-                <h2 class="text-3xl font-extrabold text-white">Yük Liftləri</h2>
-                <p class="text-gray-400 leading-relaxed text-lg">
+                <h2 class="text-3xl font-extrabold text-white" data-lang="cat_cargo">Yük Liftləri</h2>
+                <p class="text-gray-400 leading-relaxed text-lg" data-lang="cat_cargo_desc">
                     Anbarlar, fabriklər, ticarət mərkəzləri və sənaye müəssisələri üçün yüksək yükdaşıma qabiliyyətinə malik möhkəm yük liftləri. Ağır çəkili yüklərin etibarlı və fasiləsiz daşınması üçün optimallaşdırılmışdır.
                 </p>
                 <ul class="space-y-3 text-gray-300">
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>Yüksək yükdaşıma tutumu (tonlarla çəki)</span></li>
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>Gücləndirilmiş polad platformalar və qapılar</span></li>
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>İllərlə davamlı intensiv istifadəyə uyğunluq</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_cargo_l1">Yüksək yükdaşıma tutumu (tonlarla çəki)</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_cargo_l2">Gücləndirilmiş polad platformalar və qapılar</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_cargo_l3">İllərlə davamlı intensiv istifadəyə uyğunluq</span></li>
                 </ul>
             </div>
             <div class="relative group">
@@ -157,14 +157,14 @@
         <!-- 4. Eskalator Sistemləri -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
             <div class="lg:order-2 space-y-6">
-                <h2 class="text-3xl font-extrabold text-white">Eskalator Sistemləri</h2>
-                <p class="text-gray-400 leading-relaxed text-lg">
+                <h2 class="text-3xl font-extrabold text-white" data-lang="cat_esc">Eskalator Sistemləri</h2>
+                <p class="text-gray-400 leading-relaxed text-lg" data-lang="cat_esc_desc">
                     Ticarət mərkəzləri, metro stansiyaları, hava limanları və böyük ictimai binalar üçün fasiləsiz insan axınını təmin edən müasir eskalator və hərəkətli səki (moving walk) sistemləri.
                 </p>
                 <ul class="space-y-3 text-gray-300">
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>Enerjiyə qənaət edən ağıllı mühərrik sistemləri</span></li>
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>Səssiz və rəvan işləmə mexanizmi</span></li>
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>Beynəlxalq təhlükəsizlik sertifikatları</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_esc_l1">Enerjiyə qənaət edən ağıllı mühərrik sistemləri</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_esc_l2">Səssiz və rəvan işləmə mexanizmi</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_esc_l3">Beynəlxalq təhlükəsizlik sertifikatları</span></li>
                 </ul>
             </div>
             <div class="lg:order-1 relative group">
@@ -178,14 +178,14 @@
         <!-- 5. Quraşdırılma və Texniki Xidmət -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
             <div class="space-y-6">
-                <h2 class="text-3xl font-extrabold text-white">Quraşdırılma və Texniki Xidmət</h2>
-                <p class="text-gray-400 leading-relaxed text-lg">
+                <h2 class="text-3xl font-extrabold text-white" data-lang="cat_maint">Quraşdırılma və Texniki Xidmət</h2>
+                <p class="text-gray-400 leading-relaxed text-lg" data-lang="cat_maint_desc">
                     Peşəkar mühəndis və texnik komandamız tərəfindən bütün növ lift və eskalatorların quraşdırılması, sazlanması, profilaktik baxışı və 7/24 operativ təmiri həyata keçirilir.
                 </p>
                 <ul class="space-y-3 text-gray-300">
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>7/24 operativ servis dəstəyi</span></li>
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>Təcrübəli və sertifikatlı mütəxəssislər</span></li>
-                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span>Orijinal ehtiyat hissələri və zəmanət</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_maint_l1">7/24 operativ servis dəstəyi</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_maint_l2">Təcrübəli və sertifikatlı mütəxəssislər</span></li>
+                    <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_maint_l3">Orijinal ehtiyat hissələri və zəmanət</span></li>
                 </ul>
             </div>
             <div class="relative group">
@@ -204,24 +204,24 @@
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                 <div class="space-y-4">
                     <img src="logo.jpg" alt="QERB TECHNOLOGY Logo" class="h-16 w-auto object-contain mb-4">
-                    <p class="text-gray-400 text-sm">
+                    <p class="text-gray-400 text-sm" data-lang="footer_desc">
                         Lift və eskalator sistemlərində etibarlı tərəfdaşınız. Keyfiyyət, etibar və təhlükəsizlik bizim əsas prinsiplərimizdir.
                     </p>
                 </div>
 
                 <div>
-                    <h3 class="text-white font-bold text-lg mb-4">Sürətli Keçidlər</h3>
+                    <h3 class="text-white font-bold text-lg mb-4" data-lang="footer_links_title">Sürətli Keçidlər</h3>
                     <ul class="space-y-2 text-gray-400 text-sm">
-                        <li><a href="#liftler" class="hover:text-qerb-light transition">Sərnişin Liftləri</a></li>
-                        <li><a href="#liftler" class="hover:text-qerb-light transition">Mətbəx Liftləri</a></li>
-                        <li><a href="#liftler" class="hover:text-qerb-light transition">Yük Liftləri</a></li>
-                        <li><a href="#liftler" class="hover:text-qerb-light transition">Eskalatorlar</a></li>
-                        <li><a href="#liftler" class="hover:text-qerb-light transition">Texniki Xidmət</a></li>
+                        <li><a href="#liftler" class="hover:text-qerb-light transition" data-lang="cat_pass">Sərnişin Liftləri</a></li>
+                        <li><a href="#liftler" class="hover:text-qerb-light transition" data-lang="cat_kitchen">Mətbəx Liftləri</a></li>
+                        <li><a href="#liftler" class="hover:text-qerb-light transition" data-lang="cat_cargo">Yük Liftləri</a></li>
+                        <li><a href="#liftler" class="hover:text-qerb-light transition" data-lang="cat_esc">Eskalator Sistemləri</a></li>
+                        <li><a href="#liftler" class="hover:text-qerb-light transition" data-lang="cat_maint">Texniki Xidmət</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h3 class="text-white font-bold text-lg mb-4">Əlaqə Məlumatları</h3>
+                    <h3 class="text-white font-bold text-lg mb-4" data-lang="footer_contact_title">Əlaqə Məlumatları</h3>
                     <ul class="space-y-3 text-gray-400 text-sm">
                         <li>
                             <a href="mailto:m.rasim@qerbtech.az" class="flex items-center space-x-3 hover:text-qerb-light transition">
@@ -245,35 +245,191 @@
                 </div>
 
                 <div>
-                    <h3 class="text-white font-bold text-lg mb-4">Prinsiplərimiz</h3>
+                    <h3 class="text-white font-bold text-lg mb-4" data-lang="footer_principles_title">Prinsiplərimiz</h3>
                     <div class="bg-qerb-gray p-4 rounded-xl border border-qerb-dark/30 text-center">
-                        <span class="text-qerb-light font-bold tracking-widest text-xs uppercase block">KEYFİYYƏT</span>
+                        <span class="text-qerb-light font-bold tracking-widest text-xs uppercase block" data-lang="footer_principle_1">KEYFİYYƏT</span>
                         <span class="text-gray-500 text-xs my-1 block">•</span>
-                        <span class="text-qerb-light font-bold tracking-widest text-xs uppercase block">ETİBAR</span>
+                        <span class="text-qerb-light font-bold tracking-widest text-xs uppercase block" data-lang="footer_principle_2">ETİBAR</span>
                         <span class="text-gray-500 text-xs my-1 block">•</span>
-                        <span class="text-qerb-light font-bold tracking-widest text-xs uppercase block">TƏHLÜKƏSİZLİK</span>
+                        <span class="text-qerb-light font-bold tracking-widest text-xs uppercase block" data-lang="footer_principle_3">TƏHLÜKƏSİZLİK</span>
                     </div>
                 </div>
             </div>
 
             <div class="border-t border-qerb-dark/30 pt-8 text-center text-gray-500 text-sm">
-                <p>&copy; 2026 QERB TECHNOLOGY. Bütün hüquqlar qorunur.</p>
+                <p data-lang="footer_copyright">&copy; 2026 QERB TECHNOLOGY. Bütün hüquqlar qorunur.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Dil Menyusunu idarə etmək üçün Script -->
+    <!-- SCRIPT: Dil və Scroll Animasiyası üçün -->
     <script>
-        function toggleLangMenu() {
+        // 1. SCROLL ANIMASIYASI (Yuxarı-Aşağı sürüşdürdükdə menyunun itməsi)
+        const header = document.getElementById('main-header');
+        let lastScrollY = window.scrollY;
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > lastScrollY && window.scrollY > 100) {
+                // Aşağı sürüşdürdükdə menyunu gizlət
+                header.style.transform = 'translateY(-100%)';
+            } else {
+                // Yuxarı sürüşdürdükdə menyunu göstər
+                header.style.transform = 'translateY(0)';
+            }
+            lastScrollY = window.scrollY;
+        });
+
+        // 2. DİL SEÇİMİ SİSTEMİ
+        const translations = {
+            az: {
+                menu_services: "Xidmətlər",
+                menu_contact: "Əlaqə",
+                hero_badge: "Peşəkar Lift Sistemləri",
+                hero_title_1: "HƏR NÖV LİFT İŞLƏRİ İLƏ",
+                hero_title_2: "MƏŞĞULUQ",
+                hero_slogan: "KEYFİYYƏT • ETİBAR • TƏHLÜKƏSİZLİK",
+                cat_pass: "Sərnişin Liftləri",
+                cat_pass_desc: "Müasir memarlıq standartlarına uyğun, yüksək rahatlıq, sürət və təhlükəsizlik sistemləri ilə təchiz olunmuş premium sərnişin liftlərinin quraşdırılması, təmiri və texniki xidməti.",
+                cat_pass_l1: "Yüksək səssizlik və rahat hərəkət",
+                cat_pass_l2: "Müasir dizayn və estetik görünüş",
+                cat_pass_l3: "Fövqəladə hallarda təhlükəsizlik sistemləri",
+                cat_kitchen: "Mətbəx Liftləri",
+                cat_kitchen_desc: "Restoranlar, kafe, otel və xəstəxanalar üçün xüsusi olaraq hazırlanmış kiçik ölçülü, gigiyenik və sürətli yemək/xidmət liftləri.",
+                cat_kitchen_l1: "Paslanmayan polad konstruksiya",
+                cat_kitchen_l2: "Sanitariya normalarına tam uyğunluq",
+                cat_kitchen_l3: "Kompakt və rahat istifadə",
+                cat_cargo: "Yük Liftləri",
+                cat_cargo_desc: "Anbarlar, fabriklər, ticarət mərkəzləri və sənaye müəssisələri üçün yüksək yükdaşıma qabiliyyətinə malik möhkəm yük liftləri.",
+                cat_cargo_l1: "Yüksək yükdaşıma tutumu (tonlarla çəki)",
+                cat_cargo_l2: "Gücləndirilmiş polad platformalar və qapılar",
+                cat_cargo_l3: "İllərlə davamlı intensiv istifadəyə uyğunluq",
+                cat_esc: "Eskalator Sistemləri",
+                cat_esc_desc: "Ticarət mərkəzləri, metro stansiyaları və böyük ictimai binalar üçün fasiləsiz insan axınını təmin edən müasir eskalator sistemləri.",
+                cat_esc_l1: "Enerjiyə qənaət edən ağıllı mühərrik sistemləri",
+                cat_esc_l2: "Səssiz və rəvan işləmə mexanizmi",
+                cat_esc_l3: "Beynəlxalq təhlükəsizlik sertifikatları",
+                cat_maint: "Quraşdırılma və Texniki Xidmət",
+                cat_maint_desc: "Peşəkar mühəndis və texnik komandamız tərəfindən bütün növ lift və eskalatorların quraşdırılması, sazlanması və 7/24 operativ təmiri həyata keçirilir.",
+                cat_maint_l1: "7/24 operativ servis dəstəyi",
+                cat_maint_l2: "Təcrübəli və sertifikatlı mütəxəssislər",
+                cat_maint_l3: "Orijinal ehtiyat hissələri və zəmanət",
+                footer_desc: "Lift və eskalator sistemlərində etibarlı tərəfdaşınız. Keyfiyyət, etibar və təhlükəsizlik bizim əsas prinsiplərimizdir.",
+                footer_links_title: "Sürətli Keçidlər",
+                footer_contact_title: "Əlaqə Məlumatları",
+                footer_principles_title: "Prinsiplərimiz",
+                footer_principle_1: "KEYFİYYƏT",
+                footer_principle_2: "ETİBAR",
+                footer_principle_3: "TƏHLÜKƏSİZLİK",
+                footer_copyright: "© 2026 QERB TECHNOLOGY. Bütün hüquqlar qorunur."
+            },
+            en: {
+                menu_services: "Services",
+                menu_contact: "Contact",
+                hero_badge: "Professional Elevator Systems",
+                hero_title_1: "ALL KINDS OF ELEVATOR",
+                hero_title_2: "SERVICES",
+                hero_slogan: "QUALITY • RELIABILITY • SAFETY",
+                cat_pass: "Passenger Elevators",
+                cat_pass_desc: "Installation, repair, and maintenance of premium passenger elevators equipped with high comfort, speed, and safety systems according to modern architectural standards.",
+                cat_pass_l1: "High silence and comfortable movement",
+                cat_pass_l2: "Modern design and aesthetic appearance",
+                cat_pass_l3: "Emergency safety systems",
+                cat_kitchen: "Kitchen Elevators",
+                cat_kitchen_desc: "Small-sized, hygienic, and fast food/service elevators specially designed for restaurants, cafes, hotels, and hospitals.",
+                cat_kitchen_l1: "Stainless steel construction",
+                cat_kitchen_l2: "Full compliance with sanitary standards",
+                cat_kitchen_l3: "Compact and convenient use",
+                cat_cargo: "Freight Elevators",
+                cat_cargo_desc: "Robust freight elevators with high load capacity for warehouses, factories, shopping centers, and industrial enterprises.",
+                cat_cargo_l1: "High load capacity (tons of weight)",
+                cat_cargo_l2: "Reinforced steel platforms and doors",
+                cat_cargo_l3: "Suitable for years of continuous intensive use",
+                cat_esc: "Escalator Systems",
+                cat_esc_desc: "Modern escalator and moving walk systems ensuring uninterrupted people flow for shopping centers, metro stations, and public buildings.",
+                cat_esc_l1: "Energy-saving smart motor systems",
+                cat_esc_l2: "Silent and smooth operating mechanism",
+                cat_esc_l3: "International safety certificates",
+                cat_maint: "Installation & Maintenance",
+                cat_maint_desc: "Installation, adjustment, preventive maintenance, and 24/7 prompt repair of all types of elevators and escalators by our professional team.",
+                cat_maint_l1: "24/7 prompt service support",
+                cat_maint_l2: "Experienced and certified specialists",
+                cat_maint_l3: "Original spare parts and warranty",
+                footer_desc: "Your reliable partner in elevator and escalator systems. Quality, reliability, and safety are our main principles.",
+                footer_links_title: "Quick Links",
+                footer_contact_title: "Contact Info",
+                footer_principles_title: "Our Principles",
+                footer_principle_1: "QUALITY",
+                footer_principle_2: "RELIABILITY",
+                footer_principle_3: "SAFETY",
+                footer_copyright: "© 2026 QERB TECHNOLOGY. All rights reserved."
+            },
+            ru: {
+                menu_services: "Услуги",
+                menu_contact: "Контакты",
+                hero_badge: "Профессиональные Лифтовые Системы",
+                hero_title_1: "ВСЕ ВИДЫ ЛИФТОВЫХ",
+                hero_title_2: "РАБОТ",
+                hero_slogan: "КАЧЕСТВО • НАДЕЖНОСТЬ • БЕЗОПАСНОСТЬ",
+                cat_pass: "Пассажирские Лифты",
+                cat_pass_desc: "Установка, ремонт и техническое обслуживание премиальных пассажирских лифтов, оборудованных системами комфорта и безопасности по современным стандартами.",
+                cat_pass_l1: "Высокая бесшумность и плавный ход",
+                cat_pass_l2: "Современный дизайн и эстетичный вид",
+                cat_pass_l3: "Системы безопасности в чрезвычайных ситуациях",
+                cat_kitchen: "Кухонные Лифты",
+                cat_kitchen_desc: "Малогабаритные, гигиеничные и быстрые сервисные лифты, специально разработанные для ресторанов, кафе, отелей и больниц.",
+                cat_kitchen_l1: "Конструкция из нержавеющей стали",
+                cat_kitchen_l2: "Полное соответствие санитарным нормам",
+                cat_kitchen_l3: "Компактность и удобство использования",
+                cat_cargo: "Грузовые Лифты",
+                cat_cargo_desc: "Надежные грузовые лифты с высокой грузоподъемностью для складов, фабрик, торговых центров и промышленных предприятий.",
+                cat_cargo_l1: "Высокая грузоподъемность (тонны веса)",
+                cat_cargo_l2: "Усиленные стальные платформы и двери",
+                cat_cargo_l3: "Пригодность для интенсивного использования",
+                cat_esc: "Эскалаторные Системы",
+                cat_esc_desc: "Современные системы эскалаторов, обеспечивающие бесперебойный поток людей для торговых центров, станций метро и общественных зданий.",
+                cat_esc_l1: "Энергосберегающие умные моторные системы",
+                cat_esc_l2: "Бесшумный и плавный механизм работы",
+                cat_esc_l3: "Международные сертификаты безопасности",
+                cat_maint: "Установка и Обслуживание",
+                cat_maint_desc: "Установка, наладка, профилактическое обслуживание и круглосуточный ремонт всех видов лифтов и эскалаторов нашей профессиональной командой.",
+                cat_maint_l1: "Круглосуточная поддержка 24/7",
+                cat_maint_l2: "Опытные и сертифицированные специалисты",
+                cat_maint_l3: "Оригинальные запчасти и гарантия",
+                footer_desc: "Ваш надежный партнер в системах лифтов и эскалаторов. Качество, надежность и безопасность - наши главные принципы.",
+                footer_links_title: "Быстрые Ссылки",
+                footer_contact_title: "Контактная Информация",
+                footer_principles_title: "Наши Принципы",
+                footer_principle_1: "КАЧЕСТВО",
+                footer_principle_2: "НАДЕЖНОСТЬ",
+                footer_principle_3: "БЕЗОПАСНОСТЬ",
+                footer_copyright: "© 2026 QERB TECHNOLOGY. Все права защищены."
+            }
+        };
+
+        function toggleLangMenu(event) {
+            event.stopPropagation();
             const dropdown = document.getElementById('lang-dropdown');
             dropdown.classList.toggle('hidden');
         }
 
-        // Menyudan kənara kliklədikdə onu bağlamaq üçün
+        function changeLanguage(langCode) {
+            // Səhifədəki bütün mətni dəyiş
+            document.querySelectorAll('[data-lang]').forEach(el => {
+                const key = el.getAttribute('data-lang');
+                if (translations[langCode] && translations[langCode][key]) {
+                    el.textContent = translations[langCode][key];
+                }
+            });
+            // Düymədəki hərfləri (AZ, EN, RU) dəyiş
+            document.getElementById('current-lang-text').textContent = langCode.toUpperCase();
+            // Menyunu bağla
+            document.getElementById('lang-dropdown').classList.add('hidden');
+        }
+
+        // Kənara klikləyəndə menyunu bağla
         window.addEventListener('click', function(e) {
-            const menu = document.getElementById('lang-menu');
             const dropdown = document.getElementById('lang-dropdown');
-            if (!menu.contains(e.target)) {
+            if (!dropdown.classList.contains('hidden')) {
                 dropdown.classList.add('hidden');
             }
         });
