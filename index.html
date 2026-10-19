@@ -14,11 +14,11 @@
                 extend: {
                     colors: {
                         qerb: {
-                            black: '#000000',     /* Tam qara arxa fon */
-                            gray: '#0a0a0a',      /* Kartlar üçün çox tünd boz/qara */
-                            gold: '#C5A059',      /* Loqodakı əsas qızılı */
-                            light: '#E6C983',     /* Parlaq qızılı */
-                            dark: '#8E6F31'       /* Tünd qızılı kölgələr */
+                            black: '#000000',
+                            gray: '#0a0a0a',
+                            gold: '#C5A059',
+                            light: '#E6C983',
+                            dark: '#8E6F31'
                         }
                     }
                 }
@@ -26,7 +26,6 @@
         }
     </script>
     <style>
-        /* Qızılı mətn effekti üçün xüsusi sinif */
         .text-gradient-gold {
             background: linear-gradient(to right, #E6C983, #C5A059, #8E6F31);
             -webkit-background-clip: text;
@@ -40,7 +39,7 @@
     <header class="sticky top-0 z-50 bg-black/90 backdrop-blur border-b border-qerb-dark/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
             
-            <!-- Loqo hissəsi: Şəklin adı logo.jpg olmalıdır -->
+            <!-- Loqo hissəsi -->
             <a href="#" class="flex items-center">
                 <img src="logo.jpg" alt="QERB TECHNOLOGY Logo" class="h-16 md:h-20 w-auto object-contain">
             </a>
@@ -49,15 +48,30 @@
                 <a href="#liftler" class="hover:text-qerb-light transition text-qerb-gold">Xidmətlər</a>
                 <a href="#elaqe" class="hover:text-qerb-light transition text-qerb-gold">Əlaqə</a>
             </nav>
-            <a href="#elaqe" class="bg-gradient-to-r from-qerb-dark via-qerb-gold to-qerb-dark hover:from-qerb-gold hover:to-qerb-light text-black font-bold px-6 py-2.5 rounded-full text-sm transition shadow-lg shadow-qerb-gold/20">
-                Sifariş Et
-            </a>
+            
+            <!-- Dil Seçimi -->
+            <div class="relative inline-block text-left" id="lang-menu">
+                <button type="button" onclick="toggleLangMenu()" class="inline-flex justify-center items-center gap-x-2 bg-gradient-to-r from-qerb-dark via-qerb-gold to-qerb-dark hover:from-qerb-gold hover:to-qerb-light text-black font-bold px-5 py-2.5 rounded-full text-sm transition shadow-lg shadow-qerb-gold/20">
+                    <i class="fa-solid fa-globe"></i>
+                    <span>AZ</span>
+                    <i class="fa-solid fa-chevron-down text-xs"></i>
+                </button>
+                <!-- Açılan Menyusu -->
+                <div id="lang-dropdown" class="hidden absolute right-0 z-10 mt-2 w-36 origin-top-right rounded-xl bg-qerb-gray border border-qerb-dark/50 shadow-2xl focus:outline-none overflow-hidden transition-all">
+                    <div class="py-1">
+                        <a href="#" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-qerb-gold/20 hover:text-qerb-light transition">Azərbaycan</a>
+                        <a href="#" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-qerb-gold/20 hover:text-qerb-light transition">English</a>
+                        <a href="#" class="block px-4 py-2.5 text-sm text-gray-300 hover:bg-qerb-gold/20 hover:text-qerb-light transition">Русский</a>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </header>
 
     <!-- Hero Section -->
     <section class="relative py-20 lg:py-32 overflow-hidden bg-black text-center border-b border-qerb-gray">
-        <!-- Qızılı arxa fon işığı (glow) -->
+        <!-- Qızılı arxa fon işığı -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-qerb-gold/10 rounded-full blur-[100px] pointer-events-none"></div>
         
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -80,10 +94,6 @@
         <!-- 1. Sərnişin Liftləri -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
             <div class="space-y-6">
-                <div class="inline-flex items-center space-x-3 text-qerb-light bg-qerb-dark/20 px-4 py-2 rounded-lg border border-qerb-gold/20">
-                    <i class="fa-solid fa-elevator text-xl"></i>
-                    <span class="font-bold tracking-wide uppercase text-sm">Kateqoriya 01</span>
-                </div>
                 <h2 class="text-3xl font-extrabold text-white">Sərnişin Liftləri</h2>
                 <p class="text-gray-400 leading-relaxed text-lg">
                     Müasir memarlıq standartlarına uyğun, yüksək rahatlıq, sürət və təhlükəsizlik sistemləri ilə təchiz olunmuş premium sərnişin liftlərinin quraşdırılması, təmiri və texniki xidməti. Yaşayış binaları, biznes mərkəzləri və otellər üçün ideal həllər.
@@ -105,10 +115,6 @@
         <!-- 2. Mətbəx Liftləri -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
             <div class="lg:order-2 space-y-6">
-                <div class="inline-flex items-center space-x-3 text-qerb-light bg-qerb-dark/20 px-4 py-2 rounded-lg border border-qerb-gold/20">
-                    <i class="fa-solid fa-utensils text-xl"></i>
-                    <span class="font-bold tracking-wide uppercase text-sm">Kateqoriya 02</span>
-                </div>
                 <h2 class="text-3xl font-extrabold text-white">Mətbəx Liftləri</h2>
                 <p class="text-gray-400 leading-relaxed text-lg">
                     Restoranlar, kafe, otel və xəstəxanalar üçün xüsusi olaraq hazırlanmış kiçik ölçülü, gigiyenik və sürətli yemək/xidmət liftləri. Qida və ləvazimatların mərtəbələr arası təhlükəsiz daşınmasını təmin edir.
@@ -130,10 +136,6 @@
         <!-- 3. Yük Liftləri -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
             <div class="space-y-6">
-                <div class="inline-flex items-center space-x-3 text-qerb-light bg-qerb-dark/20 px-4 py-2 rounded-lg border border-qerb-gold/20">
-                    <i class="fa-solid fa-boxes-stacked text-xl"></i>
-                    <span class="font-bold tracking-wide uppercase text-sm">Kateqoriya 03</span>
-                </div>
                 <h2 class="text-3xl font-extrabold text-white">Yük Liftləri</h2>
                 <p class="text-gray-400 leading-relaxed text-lg">
                     Anbarlar, fabriklər, ticarət mərkəzləri və sənaye müəssisələri üçün yüksək yükdaşıma qabiliyyətinə malik möhkəm yük liftləri. Ağır çəkili yüklərin etibarlı və fasiləsiz daşınması üçün optimallaşdırılmışdır.
@@ -155,10 +157,6 @@
         <!-- 4. Eskalator Sistemləri -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
             <div class="lg:order-2 space-y-6">
-                <div class="inline-flex items-center space-x-3 text-qerb-light bg-qerb-dark/20 px-4 py-2 rounded-lg border border-qerb-gold/20">
-                    <i class="fa-solid fa-stairs text-xl"></i>
-                    <span class="font-bold tracking-wide uppercase text-sm">Kateqoriya 04</span>
-                </div>
                 <h2 class="text-3xl font-extrabold text-white">Eskalator Sistemləri</h2>
                 <p class="text-gray-400 leading-relaxed text-lg">
                     Ticarət mərkəzləri, metro stansiyaları, hava limanları və böyük ictimai binalar üçün fasiləsiz insan axınını təmin edən müasir eskalator və hərəkətli səki (moving walk) sistemləri.
@@ -180,10 +178,6 @@
         <!-- 5. Quraşdırılma və Texniki Xidmət -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
             <div class="space-y-6">
-                <div class="inline-flex items-center space-x-3 text-qerb-light bg-qerb-dark/20 px-4 py-2 rounded-lg border border-qerb-gold/20">
-                    <i class="fa-solid fa-screwdriver-wrench text-xl"></i>
-                    <span class="font-bold tracking-wide uppercase text-sm">Kateqoriya 05</span>
-                </div>
                 <h2 class="text-3xl font-extrabold text-white">Quraşdırılma və Texniki Xidmət</h2>
                 <p class="text-gray-400 leading-relaxed text-lg">
                     Peşəkar mühəndis və texnik komandamız tərəfindən bütün növ lift və eskalatorların quraşdırılması, sazlanması, profilaktik baxışı və 7/24 operativ təmiri həyata keçirilir.
@@ -209,7 +203,6 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                 <div class="space-y-4">
-                    <!-- Footer Loqo hissəsi -->
                     <img src="logo.jpg" alt="QERB TECHNOLOGY Logo" class="h-16 w-auto object-contain mb-4">
                     <p class="text-gray-400 text-sm">
                         Lift və eskalator sistemlərində etibarlı tərəfdaşınız. Keyfiyyət, etibar və təhlükəsizlik bizim əsas prinsiplərimizdir.
@@ -269,5 +262,21 @@
         </div>
     </footer>
 
+    <!-- Dil Menyusunu idarə etmək üçün Script -->
+    <script>
+        function toggleLangMenu() {
+            const dropdown = document.getElementById('lang-dropdown');
+            dropdown.classList.toggle('hidden');
+        }
+
+        // Menyudan kənara kliklədikdə onu bağlamaq üçün
+        window.addEventListener('click', function(e) {
+            const menu = document.getElementById('lang-menu');
+            const dropdown = document.getElementById('lang-dropdown');
+            if (!menu.contains(e.target)) {
+                dropdown.classList.add('hidden');
+            }
+        });
+    </script>
 </body>
 </html>
