@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QERB Technology | Premium Lift Sistemləri</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- GSAP for Animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Three.js for 3D Elements -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#070709',
+                        darkgray: '#0F0F14',
+                        gold: '#D4AF37',
+                        lightgold: '#E5C378',
+                        cream: '#FAF3E0'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #070709;
+            color: #FAF3E0;
+            overflow-x: hidden;
+        }
+        
+        /* Glassmorphism Effect */
+        .glass-panel {
+            background: rgba(15, 15, 20, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .text-gradient-gold {
+            background: linear-gradient(to right, #E5C378, #D4AF37, #AA7C11);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #canvas-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .glowing-shadow {
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-gold selection:text-obsidian">
+
+    <!-- 3D Background Canvas -->
+    <div id="canvas-container"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass-panel border-b-0 py-4 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer">
+                <!-- Loqo üçün yer (Şəkil əvəzinə CSS ilə yaradılmış ikon qoyulub, istəsəniz şəklinizi src-yə əlavə edə bilərsiniz) -->
+                <div class="w-10 h-10 rounded-full border-2 border-gold flex items-center justify-center">
+                    <span class="text-gold font-bold text-xl">Q</span>
+                </div>
+                <span class="text-2xl font-extrabold tracking-widest text-cream">QERB</span>
+            </div>
+            <div class="hidden md:flex gap-8 text-sm font-semibold tracking-wider">
+                <a href="#about" class="hover:text-gold transition-colors">HAQQIMIZDA</a>
+                <a href="#products" class="hover:text-gold transition-colors">MƏHSULLAR</a>
+                <a href="#tech" class="hover:text-gold transition-colors">TEXNOLOGİYA</a>
+                <a href="#contact" class="hover:text-gold transition-colors">ƏLAQƏ</a>
+            </div>
+            <button class="px-6 py-2 bg-transparent border border-gold text-gold hover:bg-gold hover:text-obsidian transition-all duration-300 rounded-sm font-semibold tracking-wider text-sm">
+                SİFARİŞ ET
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center text-center px-4 pt-20">
+        <div class="z-10 max-w-4xl hero-content">
+            <h2 class="text-gold text-sm md:text-base font-bold tracking-[0.3em] mb-4 uppercase">Gələcəyin Arxitekturası</h2>
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 leading-tight">
+                Zirvəyə <span class="text-gradient-gold">Qüsursuz</span> Yüksəliş
+            </h1>
+            <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto font-light">
+                QERB Technology - Premium şüşə və qızılı titan detallarla dizayn edilmiş, maqnit levitasiya (MagLev) texnologiyalı yeni nəsil ağıllı lift sistemləri.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#products" class="px-8 py-4 bg-gold text-obsidian font-bold tracking-wider rounded-sm hover:bg-lightgold transition-colors glowing-shadow">
+                    MƏHSULLARI KƏŞF ET
+                </a>
+                <a href="#configurator" class="px-8 py-4 bg-transparent border border-gold text-gold font-bold tracking-wider rounded-sm hover:bg-white/5 transition-colors">
+                    LİFTİNİ YARAT
+                </a>
+            </div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-70">
+            <span class="text-xs tracking-widest mb-2 text-gold">AŞAĞI QAYDIRIN</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-gold to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="py-24 bg-obsidian relative z-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 section-header">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Eksklüziv Kolleksiya</h2>
+                <div class="w-16 h-1 bg-gold mx-auto mb-4"></div>
+                <p class="text-gray-400 max-w-2xl mx-auto">Hər bir arxitektura üçün xüsusi olaraq dizayn edilmiş, təhlükəsizlik və lüksün mükəmməl balansı.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Product 1 -->
+                <div class="glass-panel p-8 rounded-lg transform hover:-translate-y-2 transition-transform duration-300 product-card cursor-pointer group">
+                    <div class="h-48 w-full border border-gold/20 mb-6 relative overflow-hidden flex items-center justify-center bg-black/50">
+                        <div class="w-20 h-32 border-2 border-gold/50 rounded-sm relative group-hover:border-gold transition-colors duration-500">
+                            <!-- Minimalist lift qapısı ikonu -->
+                            <div class="absolute inset-y-0 left-1/2 w-[1px] bg-gold/50 group-hover:bg-gold"></div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-2">Apex Glass 360</h3>
+                    <p class="text-gray-400 text-sm mb-4">Tam panoramik şüşə kabin. Müasir villalar və qüllələr üçün idealdır.</p>
+                    <a href="#" class="text-gold text-sm font-semibold tracking-wider flex items-center gap-2 group-hover:gap-3 transition-all">
+                        Detallı Bax <span class="text-xl">&rarr;</span>
+                    </a>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="glass-panel p-8 rounded-lg transform hover:-translate-y-2 transition-transform duration-300 product-card cursor-pointer group relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-gold text-obsidian text-xs font-bold px-3 py-1 rounded-bl-lg">BESTSELLER</div>
+                    <div class="h-48 w-full border border-gold/20 mb-6 relative overflow-hidden flex items-center justify-center bg-black/50">
+                        <div class="w-20 h-32 border-2 border-gold bg-gold/10 rounded-sm relative shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+                            <div class="absolute inset-y-0 left-1/2 w-[1px] bg-gold"></div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-2">Imperial Gold</h3>
+                    <p class="text-gray-400 text-sm mb-4">Qızılı titan işləmələr və mərmər döşəmə ilə klassik lüks axtaranlar üçün.</p>
+                    <a href="#" class="text-gold text-sm font-semibold tracking-wider flex items-center gap-2 group-hover:gap-3 transition-all">
+                        Detallı Bax <span class="text-xl">&rarr;</span>
+                    </a>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="glass-panel p-8 rounded-lg transform hover:-translate-y-2 transition-transform duration-300 product-card cursor-pointer group">
+                    <div class="h-48 w-full border border-gold/20 mb-6 relative overflow-hidden flex items-center justify-center bg-black/50">
+                        <div class="w-20 h-32 border-2 border-blue-500/50 rounded-sm relative group-hover:border-blue-400 transition-colors duration-500">
+                             <div class="absolute inset-y-0 left-1/2 w-[1px] bg-blue-500/50 group-hover:bg-blue-400"></div>
+                             <div class="absolute bottom-0 w-full h-2 bg-blue-500/80 blur-[2px]"></div>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-bold text-cream mb-2">CyberLift MagLev</h3>
+                    <p class="text-gray-400 text-sm mb-4">Sürtünməsiz maqnit levitasiyası. Səs-küysüz və ultra-sürətli təcrübə.</p>
+                    <a href="#" class="text-gold text-sm font-semibold tracking-wider flex items-center gap-2 group-hover:gap-3 transition-all">
+                        Detallı Bax <span class="text-xl">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Specs / IoT Dashboard -->
+    <section id="tech" class="py-24 bg-darkgray relative z-10 border-t border-gold/10">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col lg:flex-row items-center gap-12">
+            <div class="w-full lg:w-1/2 tech-text">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">Ağıllı Telemetriya və Təhlükəsizlik</h2>
+                <p class="text-gray-300 mb-6">
+                    QERB liftləri sadəcə daşıyıcı deyil, həm də süni intellektlə təchiz olunmuş canlı mexanizmlərdir. Daxili IoT sensorları hər saniyə minlərlə məlumatı analiz edərək qüsursuz işləməni təmin edir.
+                </p>
+                <ul class="space-y-4">
+                    <li class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center border border-gold text-gold">✓</div>
+                        <div>
+                            <h4 class="font-bold text-cream">Süni İntellekt (AI) Monitorinqi</h4>
+                            <p class="text-sm text-gray-400">Ehtimal olunan nasazlıqları öncədən təyin edir.</p>
+                        </div>
+                    </li>
+                    <li class="flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-gold/20 flex items-center justify-center border border-gold text-gold">✓</div>
+                        <div>
+                            <h4 class="font-bold text-cream">Səssiz Hərəkət</h4>
+                            <p class="text-sm text-gray-400">Vibrasiya və səsi minimuma endirən aerodinamik dizayn.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Live Dashboard UI -->
+            <div class="w-full lg:w-1/2 glass-panel p-6 rounded-xl relative overflow-hidden tech-dashboard">
+                <div class="flex justify-between items-center mb-6 border-b border-gray-700 pb-4">
+                    <h3 class="font-bold text-gold tracking-widest">QERB SYSTEM STATUS</h3>
+                    <span class="flex items-center gap-2 text-xs text-green-400">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> CANLI
+                    </span>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 mb-6">
+                    <div class="bg-black/40 p-4 rounded border border-gray-800">
+                        <p class="text-xs text-gray-500 mb-1">Cari Sürət</p>
+                        <p class="text-2xl font-mono text-cream" id="speed-counter">2.5 <span class="text-sm text-gold">m/s</span></p>
+                    </div>
+                    <div class="bg-black/40 p-4 rounded border border-gray-800">
+                        <p class="text-xs text-gray-500 mb-1">Mərtəbə</p>
+                        <p class="text-2xl font-mono text-cream" id="floor-counter">12</p>
+                    </div>
+                    <div class="bg-black/40 p-4 rounded border border-gray-800">
+                        <p class="text-xs text-gray-500 mb-1">Vibrasiya İndeksi</p>
+                        <p class="text-2xl font-mono text-green-400">0.01 <span class="text-sm">G</span></p>
+                    </div>
+                    <div class="bg-black/40 p-4 rounded border border-gray-800">
+                        <p class="text-xs text-gray-500 mb-1">Kabin İşıqlandırması</p>
+                        <p class="text-2xl font-mono text-cream">85%</p>
+                    </div>
+                </div>
+                <div class="w-full h-1 bg-gray-800 rounded-full overflow-hidden">
+                    <div class="w-[85%] h-full bg-gradient-to-r from-gold to-yellow-200"></div>
+                </div>
+                <p class="text-xs text-right mt-2 text-gray-500">Batareya Ehtiyatı: 100%</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black border-t border-gold/20 py-12 relative z-10" id="contact">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-extrabold tracking-widest text-cream mb-6">QERB</h2>
+            <p class="text-gray-400 max-w-md mx-auto mb-8 text-sm">
+                Yüksək texnologiyalı lift sistemlərinin qlobal standartı. Arxitekturanıza lüks qatın.
+            </p>
+            <div class="flex justify-center gap-6 mb-8 text-sm">
+                <a href="#" class="text-gold hover:text-white transition-colors">info@qerbtechnology.com</a>
+                <span class="text-gray-600">|</span>
+                <span class="text-gray-400">+994 50 000 00 00</span>
+            </div>
+            <p class="text-xs text-gray-600">&copy; 2026 QERB Technology. Bütün hüquqlar qorunur.</p>
+        </div>
+    </footer>
+
+    <!-- GSAP Animations & Interactive Logic -->
+    <script>
+        // Register GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Section Animation
+        gsap.from(".hero-content > *", {
+            y: 30,
+            opacity: 0,
+            duration: 1,
+            stagger: 0.2,
+            ease: "power3.out",
+            delay: 0.5
+        });
+
+        // Products Scroll Animation
+        gsap.from(".section-header", {
+            scrollTrigger: {
+                trigger: "#products",
+                start: "top 80%",
+            },
+            y: 20,
+            opacity: 0,
+            duration: 0.8
+        });
+
+        gsap.from(".product-card", {
+            scrollTrigger: {
+                trigger: ".product-card",
+                start: "top 85%",
+            },
+            y: 40,
+            opacity: 0,
+            duration: 0.8,
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+
+        // Tech Dashboard Animation
+        gsap.from(".tech-text", {
+            scrollTrigger: {
+                trigger: "#tech",
+                start: "top 75%",
+            },
+            x: -40,
+            opacity: 0,
+            duration: 1
+        });
+
+        gsap.from(".tech-dashboard", {
+            scrollTrigger: {
+                trigger: "#tech",
+                start: "top 75%",
+            },
+            x: 40,
+            opacity: 0,
+            duration: 1
+        });
+
+        // Simulated Dashboard Numbers
+        setInterval(() => {
+            const speedEl = document.getElementById('speed-counter');
+            const floorEl = document.getElementById('floor-counter');
+            if(speedEl) {
+                // Sürət simulyasiyası
+                const currentSpeed = (2.5 + (Math.random() * 0.2 - 0.1)).toFixed(2);
+                speedEl.innerHTML = `${currentSpeed} <span class="text-sm text-gold">m/s</span>`;
+            }
+        }, 2000);
+    </script>
+
+    <!-- Three.js 3D Background Logic -->
+    <script>
+        // Setup Scene
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x070709, 0.05);
+
+        // Setup Camera
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera.position.z = 15;
+        camera.position.y = 2;
+
+        // Setup Renderer
+        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        document.getElementById('canvas-container').appendChild(renderer.domElement);
+
+        // Add Lighting
+        const ambientLight = new THREE.AmbientLight(0x404040, 2); // Soft white light
+        scene.add(ambientLight);
+
+        const pointLight = new THREE.PointLight(0xD4AF37, 2, 50); // Gold light
+        pointLight.position.set(5, 5, 5);
+        scene.add(pointLight);
+        
+        const pointLight2 = new THREE.PointLight(0xffffff, 1, 50); // White highlight
+        pointLight2.position.set(-5, 0, 5);
+        scene.add(pointLight2);
+
+        // Create 3D Elevator Cabin (Abstract representation)
+        const elevatorGroup = new THREE.Group();
+
+        // 1. Glass Box
+        const glassGeometry = new THREE.BoxGeometry(4, 6, 4);
+        const glassMaterial = new THREE.MeshPhysicalMaterial({
+            color: 0xffffff,
+            metalness: 0.1,
+            roughness: 0.1,
+            transmission: 0.9, // glass effect
+            transparent: true,
+            opacity: 0.2
+        });
+        const glassCabin = new THREE.Mesh(glassGeometry, glassMaterial);
+        elevatorGroup.add(glassCabin);
+
+        // 2. Gold Wireframe Structure
+        const edgesGeometry = new THREE.EdgesGeometry(glassGeometry);
+        const wireframeMaterial = new THREE.LineBasicMaterial({ 
+            color: 0xD4AF37, 
+            linewidth: 2 
+        });
+        const wireframe = new THREE.LineSegments(edgesGeometry, wireframeMaterial);
+        elevatorGroup.add(wireframe);
+
+        // 3. Inner details (Polyhedron inspired by logo)
+        const polyGeometry = new THREE.IcosahedronGeometry(1, 0);
+        const polyEdges = new THREE.EdgesGeometry(polyGeometry);
+        const polyMaterial = new THREE.LineBasicMaterial({ color: 0xE5C378 });
+        const polyMesh = new THREE.LineSegments(polyEdges, polyMaterial);
+        elevatorGroup.add(polyMesh);
+
+        scene.add(elevatorGroup);
+
+        // Particles (Dust/Sparks)
+        const particlesGeometry = new THREE.BufferGeometry();
+        const particlesCount = 500;
+        const posArray = new Float32Array(particlesCount * 3);
+        
+        for(let i = 0; i < particlesCount * 3; i++) {
+            posArray[i] = (Math.random() - 0.5) * 40;
+        }
+        
+        particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+        const particlesMaterial = new THREE.PointsMaterial({
+            size: 0.05,
+            color: 0xD4AF37,
+            transparent: true,
+            opacity: 0.8
+        });
+        
+        const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+        scene.add(particlesMesh);
+
+        // Animation Loop
+        let mouseX = 0;
+        let mouseY = 0;
+        let targetX = 0;
+        let targetY = 0;
+
+        const windowHalfX = window.innerWidth / 2;
+        const windowHalfY = window.innerHeight / 2;
+
+        document.addEventListener('mousemove', (event) => {
+            mouseX = (event.clientX - windowHalfX) * 0.001;
+            mouseY = (event.clientY - windowHalfY) * 0.001;
+        });
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            // Rotate Elevator Cabin slowly
+            elevatorGroup.rotation.y += 0.002;
+            polyMesh.rotation.x += 0.01;
+            polyMesh.rotation.y += 0.01;
+
+            // Move particles (simulating upward movement)
+            particlesMesh.position.y += 0.02;
+            if(particlesMesh.position.y > 10) {
+                particlesMesh.position.y = -10;
+            }
+
+            // Mouse interaction (parallax)
+            targetX = mouseX * 0.5;
+            targetY = mouseY * 0.5;
+            
+            elevatorGroup.rotation.y += 0.05 * (targetX - elevatorGroup.rotation.y);
+            elevatorGroup.rotation.x += 0.05 * (targetY - elevatorGroup.rotation.x);
+
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Handle Resize
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</body>
+</html>
