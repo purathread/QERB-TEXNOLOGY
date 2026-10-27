@@ -31,33 +31,62 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        /* Arxa plan şəkli və blur effekti üçün xüsusi CSS */
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Bura öz şəklinizin adını yazın */
+            background-image: url('background.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            /* Şəklin üzərinə tündləşdirici və bulanıq (blur) filtr əlavə edir */
+            filter: blur(8px) brightness(0.4); 
+            z-index: 1; /* Mətndən arxada qalması üçün */
+            transform: scale(1.1); /* Blur olarkən kənarlarda ağ boşluq yaranmaması üçün biraz böyüdürük */
+        }
+
+        /* Qara gradient qatı - mətni daha oxunaqlı etmək üçün */
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.9) 100%);
+            z-index: 2;
+        }
     </style>
 </head>
 <body class="bg-black text-gray-300 font-sans antialiased pt-24">
 
     <!-- Header / Navbar (Scroll with animation) -->
-    <header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-black/90 backdrop-blur border-b border-qerb-dark/30 transition-transform duration-300 ease-in-out">
+    <header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-qerb-dark/30 transition-transform duration-300 ease-in-out">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-24 flex items-center justify-between">
             
             <!-- Loqo hissəsi -->
-            <a href="#" class="flex items-center">
-                <img src="logo.jpg" alt="QERB TECHNOLOGY Logo" class="h-16 md:h-20 w-auto object-contain">
+            <a href="#" class="flex items-center z-10 relative">
+                <img src="logo.jpg" alt="QERB TECHNOLOGY Logo" class="h-16 md:h-20 w-auto object-contain drop-shadow-xl rounded">
             </a>
 
-            <nav class="hidden md:flex space-x-8 text-sm font-medium">
+            <nav class="hidden md:flex space-x-8 text-sm font-medium z-10 relative">
                 <a href="#liftler" class="hover:text-qerb-light transition text-qerb-gold" data-lang="menu_services">Xidmətlər</a>
                 <a href="#elaqe" class="hover:text-qerb-light transition text-qerb-gold" data-lang="menu_contact">Əlaqə</a>
             </nav>
             
             <!-- Dil Seçimi -->
-            <div class="relative inline-block text-left" id="lang-menu">
+            <div class="relative inline-block text-left z-20" id="lang-menu">
                 <button type="button" onclick="toggleLangMenu(event)" class="inline-flex justify-center items-center gap-x-2 bg-gradient-to-r from-qerb-dark via-qerb-gold to-qerb-dark hover:from-qerb-gold hover:to-qerb-light text-black font-bold px-5 py-2.5 rounded-full text-sm transition shadow-lg shadow-qerb-gold/20">
                     <i class="fa-solid fa-globe"></i>
                     <span id="current-lang-text">AZ</span>
                     <i class="fa-solid fa-chevron-down text-xs"></i>
                 </button>
                 <!-- Açılan Menyusu -->
-                <div id="lang-dropdown" class="hidden absolute right-0 z-10 mt-2 w-36 origin-top-right rounded-xl bg-qerb-gray border border-qerb-dark/50 shadow-2xl focus:outline-none overflow-hidden transition-all">
+                <div id="lang-dropdown" class="hidden absolute right-0 z-50 mt-2 w-36 origin-top-right rounded-xl bg-qerb-gray border border-qerb-dark/50 shadow-2xl focus:outline-none overflow-hidden transition-all">
                     <div class="py-1">
                         <button onclick="changeLanguage('az')" class="w-full text-left block px-4 py-2.5 text-sm text-gray-300 hover:bg-qerb-gold/20 hover:text-qerb-light transition">Azərbaycan</button>
                         <button onclick="changeLanguage('en')" class="w-full text-left block px-4 py-2.5 text-sm text-gray-300 hover:bg-qerb-gold/20 hover:text-qerb-light transition">English</button>
@@ -69,27 +98,33 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="relative py-20 lg:py-32 overflow-hidden bg-black text-center border-b border-qerb-gray">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-qerb-gold/10 rounded-full blur-[100px] pointer-events-none"></div>
+    <!-- Hero Section (DƏYİŞİKLİK EDİLƏN YER) -->
+    <section class="relative py-28 lg:py-40 overflow-hidden text-center border-b border-qerb-gray flex items-center justify-center min-h-[70vh]">
         
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <span class="inline-block py-1.5 px-4 rounded-full bg-qerb-dark/20 text-qerb-light border border-qerb-gold/30 text-sm font-semibold tracking-wider uppercase mb-6" data-lang="hero_badge">
+        <!-- YENİ: Arxa plan şəkli və qaranlıq qat -->
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        
+        <!-- Qızılı işıq effekti (optional, mənzərəni daha da canlandırır) -->
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-qerb-gold/15 rounded-full blur-[120px] pointer-events-none z-10"></div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+            <span class="inline-block py-1.5 px-4 rounded-full bg-black/50 backdrop-blur text-qerb-light border border-qerb-gold/40 text-sm font-semibold tracking-wider uppercase mb-6 shadow-lg" data-lang="hero_badge">
                 Peşəkar Lift Sistemləri
             </span>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white mb-6 uppercase flex flex-col gap-2">
+            <h1 class="text-4xl sm:text-5xl lg:text-7xl font-black tracking-tight text-white mb-6 uppercase flex flex-col gap-2 drop-shadow-2xl">
                 <span data-lang="hero_title_1">HƏR NÖV LİFT İŞLƏRİ İLƏ</span>
-                <span class="text-gradient-gold" data-lang="hero_title_2">MƏŞĞULUQ</span>
+                <span class="text-gradient-gold drop-shadow-2xl" data-lang="hero_title_2">MƏŞĞULUQ</span>
             </h1>
-            <div class="inline-flex items-center space-x-4 bg-qerb-gray border border-qerb-dark/50 px-8 py-4 rounded-xl shadow-2xl">
+            <div class="inline-flex items-center space-x-4 bg-black/60 backdrop-blur-md border border-qerb-dark/50 px-8 py-4 rounded-xl shadow-[0_0_30px_rgba(197,160,89,0.2)] mt-4">
                 <i class="fa-solid fa-shield-check text-qerb-light text-2xl"></i>
-                <span class="text-lg sm:text-xl font-bold tracking-widest text-qerb-light" data-lang="hero_slogan">KEYFİYYƏT • ETİBAR • TƏHLÜKƏSİZLİK</span>
+                <span class="text-lg sm:text-xl font-bold tracking-widest text-qerb-light drop-shadow-md" data-lang="hero_slogan">KEYFİYYƏT • ETİBAR • TƏHLÜKƏSİZLİK</span>
             </div>
         </div>
     </section>
 
-    <!-- Services / Sections -->
-    <main id="liftler" class="py-20 space-y-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Services / Sections (AŞAĞIDAKI HİSSƏ DƏYİŞMƏYİB) -->
+    <main id="liftler" class="py-20 space-y-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 bg-black">
         
         <!-- 1. Sərnişin Liftləri -->
         <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
@@ -199,11 +234,11 @@
     </main>
 
     <!-- Footer / Contact Section -->
-    <footer id="elaqe" class="bg-black border-t border-qerb-dark/30 pt-16 pb-12 mt-20">
+    <footer id="elaqe" class="bg-black border-t border-qerb-dark/30 pt-16 pb-12 mt-20 relative z-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                 <div class="space-y-4">
-                    <img src="logo.jpg" alt="QERB TECHNOLOGY Logo" class="h-16 w-auto object-contain mb-4">
+                    <img src="logo.jpg" alt="QERB TECHNOLOGY Logo" class="h-16 w-auto object-contain mb-4 rounded">
                     <p class="text-gray-400 text-sm" data-lang="footer_desc">
                         Lift və eskalator sistemlərində etibarlı tərəfdaşınız. Keyfiyyət, etibar və təhlükəsizlik bizim əsas prinsiplərimizdir.
                     </p>
@@ -264,16 +299,16 @@
 
     <!-- SCRIPT: Dil və Scroll Animasiyası üçün -->
     <script>
-        // 1. SCROLL ANIMASIYASI (Yuxarı-Aşağı sürüşdürdükdə menyunun itməsi)
+        // 1. SCROLL ANIMASIYASI
         const header = document.getElementById('main-header');
         let lastScrollY = window.scrollY;
 
         window.addEventListener('scroll', () => {
             if (window.scrollY > lastScrollY && window.scrollY > 100) {
-                // Aşağı sürüşdürdükdə menyunu gizlət
+                // Aşağı sürüşdürdükdə
                 header.style.transform = 'translateY(-100%)';
             } else {
-                // Yuxarı sürüşdürdükdə menyunu göstər
+                // Yuxarı sürüşdürdükdə
                 header.style.transform = 'translateY(0)';
             }
             lastScrollY = window.scrollY;
@@ -413,20 +448,16 @@
         }
 
         function changeLanguage(langCode) {
-            // Səhifədəki bütün mətni dəyiş
             document.querySelectorAll('[data-lang]').forEach(el => {
                 const key = el.getAttribute('data-lang');
                 if (translations[langCode] && translations[langCode][key]) {
                     el.textContent = translations[langCode][key];
                 }
             });
-            // Düymədəki hərfləri (AZ, EN, RU) dəyiş
             document.getElementById('current-lang-text').textContent = langCode.toUpperCase();
-            // Menyunu bağla
             document.getElementById('lang-dropdown').classList.add('hidden');
         }
 
-        // Kənara klikləyəndə menyunu bağla
         window.addEventListener('click', function(e) {
             const dropdown = document.getElementById('lang-dropdown');
             if (!dropdown.classList.contains('hidden')) {
