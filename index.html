@@ -32,9 +32,9 @@
             -webkit-text-fill-color: transparent;
         }
 
-        /* Arxa plan şəkli və blur effekti */
-        .hero-bg {
-            position: absolute;
+        /* Bütün səhifəni əhatə edən sabit arxa plan şəkli */
+        .global-bg {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
@@ -43,20 +43,9 @@
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            filter: blur(8px) brightness(0.4); 
-            z-index: 1;
-            transform: scale(1.1);
-        }
-
-        /* Qara gradient qatı */
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0.9) 100%);
-            z-index: 2;
+            filter: blur(3px) brightness(0.25); /* Blur effekti azaldıldı və tündləşdirildi */
+            z-index: -1;
+            transform: scale(1.05);
         }
 
         /* --- AXICI ANIMASIYA STİLLƏRİ --- */
@@ -66,34 +55,32 @@
             will-change: transform, opacity;
         }
 
-        /* Aşağıdan yuxarı axıcı gəliş */
         .reveal-up {
             transform: translateY(50px);
         }
 
-        /* Soldan gəliş */
         .reveal-left {
             transform: translateX(-60px);
         }
 
-        /* Sağdan gəliş */
         .reveal-right {
             transform: translateX(60px);
         }
 
-        /* Böyüyərək gəliş */
         .reveal-scale {
             transform: scale(0.9);
         }
 
-        /* Animasiya aktiv olduqda görünüş */
         .reveal.active {
             opacity: 1;
             transform: translate(0) scale(1);
         }
     </style>
 </head>
-<body class="bg-black text-gray-300 font-sans antialiased pt-24 overflow-x-hidden">
+<body class="bg-black text-gray-300 font-sans antialiased pt-24 overflow-x-hidden relative">
+
+    <!-- Bütün səhifə arxa planı -->
+    <div class="global-bg"></div>
 
     <!-- Header / Navbar -->
     <header id="main-header" class="fixed top-0 left-0 w-full z-50 bg-black/80 backdrop-blur-md border-b border-qerb-dark/30 transition-transform duration-300 ease-in-out">
@@ -130,12 +117,8 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative py-28 lg:py-40 overflow-hidden text-center border-b border-qerb-gray flex items-center justify-center min-h-[70vh]">
-        
-        <div class="hero-bg"></div>
-        <div class="hero-overlay"></div>
-        
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-qerb-gold/15 rounded-full blur-[120px] pointer-events-none z-10"></div>
+    <section class="relative py-28 lg:py-40 overflow-hidden text-center flex items-center justify-center min-h-[70vh]">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-qerb-gold/10 rounded-full blur-[120px] pointer-events-none z-10"></div>
         
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 reveal reveal-scale">
             <span class="inline-block py-1.5 px-4 rounded-full bg-black/50 backdrop-blur text-qerb-light border border-qerb-gold/40 text-sm font-semibold tracking-wider uppercase mb-6 shadow-lg" data-lang="hero_badge">
@@ -153,108 +136,103 @@
     </section>
 
     <!-- Services / Sections -->
-    <main id="liftler" class="py-20 space-y-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 bg-black">
+    <main id="liftler" class="py-20 space-y-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
         <!-- 1. Sərnişin Liftləri -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-black/40 backdrop-blur-md rounded-2xl p-8 lg:p-12 shadow-2xl">
             <div class="space-y-6 reveal reveal-left">
                 <h2 class="text-3xl font-extrabold text-white" data-lang="cat_pass">Sərnişin Liftləri</h2>
-                <p class="text-gray-400 leading-relaxed text-lg" data-lang="cat_pass_desc">
+                <p class="text-gray-300 leading-relaxed text-lg" data-lang="cat_pass_desc">
                     Müasir memarlıq standartlarına uyğun, yüksək rahatlıq, sürət və təhlükəsizlik sistemləri ilə təchiz olunmuş premium sərnişin liftlərinin quraşdırılması, təmiri və texniki xidməti. Yaşayış binaları, biznes mərkəzləri və otellər üçün ideal həllər.
                 </p>
-                <ul class="space-y-3 text-gray-300">
+                <ul class="space-y-3 text-gray-200">
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_pass_l1">Yüksək səssizlik və rahat hərəkət</span></li>
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_pass_l2">Müasir dizayn və estetik görünüş</span></li>
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_pass_l3">Fövqəladə hallarda təhlükəsizlik sistemləri</span></li>
                 </ul>
             </div>
             <div class="relative group reveal reveal-right">
-                <div class="absolute -inset-1 bg-gradient-to-r from-qerb-dark to-qerb-light rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
-                <div class="relative rounded-2xl overflow-hidden border border-qerb-dark/50 bg-black h-80 lg:h-96">
+                <div class="relative rounded-2xl overflow-hidden bg-black h-80 lg:h-96 shadow-xl">
                     <img src="lift.jpeg" alt="Sərnişin Liftləri" class="w-full h-full object-cover">
                 </div>
             </div>
         </section>
 
         <!-- 2. Mətbəx Liftləri -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-black/40 backdrop-blur-md rounded-2xl p-8 lg:p-12 shadow-2xl">
             <div class="lg:order-2 space-y-6 reveal reveal-right">
                 <h2 class="text-3xl font-extrabold text-white" data-lang="cat_kitchen">Mətbəx Liftləri</h2>
-                <p class="text-gray-400 leading-relaxed text-lg" data-lang="cat_kitchen_desc">
+                <p class="text-gray-300 leading-relaxed text-lg" data-lang="cat_kitchen_desc">
                     Restoranlar, kafe, otel və xəstəxanalar üçün xüsusi olaraq hazırlanmış kiçik ölçülü, gigiyenik və sürətli yemək/xidmət liftləri. Qida və ləvazimatların mərtəbələr arası təhlükəsiz daşınmasını təmin edir.
                 </p>
-                <ul class="space-y-3 text-gray-300">
+                <ul class="space-y-3 text-gray-200">
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_kitchen_l1">Paslanmayan polad (Stainless steel) konstruksiya</span></li>
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_kitchen_l2">Sanitariya normalarına tam uyğunluq</span></li>
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_kitchen_l3">Kompakt və rahat istifadə</span></li>
                 </ul>
             </div>
             <div class="lg:order-1 relative group reveal reveal-left">
-                <div class="absolute -inset-1 bg-gradient-to-r from-qerb-dark to-qerb-light rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
-                <div class="relative rounded-2xl overflow-hidden border border-qerb-dark/50 bg-black h-80 lg:h-96">
+                <div class="relative rounded-2xl overflow-hidden bg-black h-80 lg:h-96 shadow-xl">
                     <img src="metbexlifti.jpg" alt="Mətbəx Liftləri" class="w-full h-full object-cover">
                 </div>
             </div>
         </section>
 
         <!-- 3. Yük Liftləri -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-black/40 backdrop-blur-md rounded-2xl p-8 lg:p-12 shadow-2xl">
             <div class="space-y-6 reveal reveal-left">
                 <h2 class="text-3xl font-extrabold text-white" data-lang="cat_cargo">Yük Liftləri</h2>
-                <p class="text-gray-400 leading-relaxed text-lg" data-lang="cat_cargo_desc">
+                <p class="text-gray-300 leading-relaxed text-lg" data-lang="cat_cargo_desc">
                     Anbarlar, fabriklər, ticarət mərkəzləri və sənaye müəssisələri üçün yüksək yükdaşıma qabiliyyətinə malik möhkəm yük liftləri. Ağır çəkili yüklərin etibarlı və fasiləsiz daşınması üçün optimallaşdırılmışdır.
                 </p>
-                <ul class="space-y-3 text-gray-300">
+                <ul class="space-y-3 text-gray-200">
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_cargo_l1">Yüksək yükdaşıma tutumu (tonlarla çəki)</span></li>
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_cargo_l2">Gücləndirilmiş polad platformalar və qapılar</span></li>
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_cargo_l3">İllərlə davamlı intensiv istifadəyə uyğunluq</span></li>
                 </ul>
             </div>
             <div class="relative group reveal reveal-right">
-                <div class="absolute -inset-1 bg-gradient-to-r from-qerb-dark to-qerb-light rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
-                <div class="relative rounded-2xl overflow-hidden border border-qerb-dark/50 bg-black h-80 lg:h-96">
+                <div class="relative rounded-2xl overflow-hidden bg-black h-80 lg:h-96 shadow-xl">
                     <img src="yüklifti.jpg" alt="Yük Liftləri" class="w-full h-full object-cover">
                 </div>
             </div>
         </section>
 
         <!-- 4. Eskalator Sistemləri -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-black/40 backdrop-blur-md rounded-2xl p-8 lg:p-12 shadow-2xl">
             <div class="lg:order-2 space-y-6 reveal reveal-right">
                 <h2 class="text-3xl font-extrabold text-white" data-lang="cat_esc">Eskalator Sistemləri</h2>
-                <p class="text-gray-400 leading-relaxed text-lg" data-lang="cat_esc_desc">
+                <p class="text-gray-300 leading-relaxed text-lg" data-lang="cat_esc_desc">
                     Ticarət mərkəzləri, metro stansiyaları, hava limanları və böyük ictimai binalar üçün fasiləsiz insan axınını təmin edən müasir eskalator və hərəkətli səki (moving walk) sistemləri.
                 </p>
-                <ul class="space-y-3 text-gray-300">
+                <ul class="space-y-3 text-gray-200">
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_esc_l1">Enerjiyə qənaət edən ağıllı mühərrik sistemləri</span></li>
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_esc_l2">Səssiz və rəvan işləmə mexanizmi</span></li>
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_esc_l3">Beynəlxalq təhlükəsizlik sertifikatları</span></li>
                 </ul>
             </div>
             <div class="lg:order-1 relative group reveal reveal-left">
-                <div class="absolute -inset-1 bg-gradient-to-r from-qerb-dark to-qerb-light rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
-                <div class="relative rounded-2xl overflow-hidden border border-qerb-dark/50 bg-black h-80 lg:h-96">
+                <div class="relative rounded-2xl overflow-hidden bg-black h-80 lg:h-96 shadow-xl">
                     <img src="eskalator.jpg" alt="Eskalator Sistemləri" class="w-full h-full object-cover">
                 </div>
             </div>
         </section>
 
         <!-- 5. Quraşdırılma və Texniki Xidmət -->
-        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-qerb-gray border border-qerb-dark/30 rounded-2xl p-8 lg:p-12 shadow-2xl hover:border-qerb-gold/50 transition duration-300">
+        <section class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-black/40 backdrop-blur-md rounded-2xl p-8 lg:p-12 shadow-2xl">
             <div class="space-y-6 reveal reveal-left">
                 <h2 class="text-3xl font-extrabold text-white" data-lang="cat_maint">Quraşdırılma və Texniki Xidmət</h2>
-                <p class="text-gray-400 leading-relaxed text-lg" data-lang="cat_maint_desc">
+                <p class="text-gray-300 leading-relaxed text-lg" data-lang="cat_maint_desc">
                     Peşəkar mühəndis və texnik komandamız tərəfindən bütün növ lift və eskalatorların quraşdırılması, sazlanması, profilaktik baxışı və 7/24 operativ təmiri həyata keçirilir.
                 </p>
-                <ul class="space-y-3 text-gray-300">
+                <ul class="space-y-3 text-gray-200">
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_maint_l1">7/24 operativ servis dəstəyi</span></li>
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_maint_l2">Təcrübəli və sertifikatlı mütəxəssislər</span></li>
                     <li class="flex items-center space-x-3"><i class="fa-solid fa-check text-qerb-gold"></i> <span data-lang="cat_maint_l3">Orijinal ehtiyat hissələri və zəmanət</span></li>
                 </ul>
             </div>
             <div class="relative group reveal reveal-right">
-                <div class="absolute -inset-1 bg-gradient-to-r from-qerb-dark to-qerb-light rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-300"></div>
-                <div class="relative rounded-2xl overflow-hidden border border-qerb-dark/50 bg-black h-80 lg:h-96">
+                <div class="relative rounded-2xl overflow-hidden bg-black h-80 lg:h-96 shadow-xl">
                     <img src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=1000&q=80" alt="Quraşdırılma və Texniki Xidmət" class="w-full h-full object-cover">
                 </div>
             </div>
@@ -263,7 +241,7 @@
     </main>
 
     <!-- Footer / Contact Section -->
-    <footer id="elaqe" class="bg-black border-t border-qerb-dark/30 pt-16 pb-12 mt-20 relative z-10 reveal reveal-up">
+    <footer id="elaqe" class="bg-black/80 backdrop-blur-md pt-16 pb-12 mt-20 relative z-10 reveal reveal-up">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
                 <div class="space-y-4">
@@ -333,12 +311,11 @@
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
-                threshold: 0.15 // Elementin 15%-i görünən kimi animasiya işə düşür
+                threshold: 0.15
             };
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    // Aşağı sürüşdürəndə görünəndə 'active' əlavə edir, yuxarı qaldırıb çıxanda silir
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
                     } else {
@@ -347,7 +324,6 @@
                 });
             }, observerOptions);
 
-            // Bütün animasiyalı elementləri izləyirik
             const revealElements = document.querySelectorAll('.reveal');
             revealElements.forEach(el => observer.observe(el));
         });
@@ -375,7 +351,7 @@
                 hero_title_2: "MƏŞĞULUQ",
                 hero_slogan: "KEYFİYYƏT • ETİBAR • TƏHLÜKƏSİZLİK",
                 cat_pass: "Sərnişin Liftləri",
-                cat_pass_desc: "Müasir memarlıq standartlarına uyğun, yüksək rahatlıq, sürət və təhlükəsizlik sistemləri ilə təchiz olunmuş premium sərnişin liftlərinin quraşdırılması, təmiri və texniki xidməti.",
+                cat_pass_desc: "Müasir memarlıq standartlarına uyğun, yüksək rahatlıq, sürət və təhlükəsizlik sistemləri ilə təchiz olunmuş premium sərnişin liftlərinin quraşdırılması, təmiri və texniki xidməti. Yaşayış binaları, biznes mərkəzləri və otellər üçün ideal həllər.",
                 cat_pass_l1: "Yüksək səssizlik və rahat hərəkət",
                 cat_pass_l2: "Müasir dizayn və estetik görünüş",
                 cat_pass_l3: "Fövqəladə hallarda təhlükəsizlik sistemləri",
